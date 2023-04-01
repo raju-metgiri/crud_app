@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Django App{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'product_list' %}">Home</a></li>
+            
+        </ul>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
