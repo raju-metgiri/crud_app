@@ -4,6 +4,20 @@ from .forms import ProductForm
 from django.core.paginator import Paginator
 from django.shortcuts import render
 
+from rest_framework import generics
+from rest_framework.pagination import PageNumberPagination
+
+from .serializers import ProductSerializer
+
+
+class ProductList(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    pagination_class = PageNumberPagination
+
+class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
 
