@@ -17,3 +17,24 @@ pip install -r requirements.txt
 python.exe .\manage.py runserver
 ```
 3. Navigate to http://127.0.0.1:8000/ in your browser to access the app 
+
+## This is how to access REST API 
+
+```markdown 
+
+# GET a list of all products
+curl http://localhost:8000/products/
+
+# GET details of a specific product
+curl http://localhost:8000/products/1/
+
+# POST a new product
+curl -X POST http://localhost:8000/products/ -d '{"name": "New Product", "description": "A new product", "price": 9.99, "category": "New Category"}' -H "Content-Type: application/json"
+
+# PUT (update) an existing product
+curl -X PUT http://localhost:8000/products/1/ -d '{"name": "Updated Product", "description": "An updated product", "price": 14.99, "category": "Updated Category"}' -H "Content-Type: application/json"
+
+# DELETE an existing product
+curl -X DELETE http://localhost:8000/products/1/
+
+```
