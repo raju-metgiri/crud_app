@@ -1,35 +1,186 @@
-{% extends "base.html" %}
+
 
 {% block content %}
-  <h1>Products</h1>
-  <ul>
-    {% for product in products %}
-        <li>
-            <a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a>
-            <span>{{ product.price }}</span>
-        </li>
-    {% endfor %}
-</ul>
-{% if products.has_other_pages %}
-    <div class="pagination">
+  <h1 class="product-list-heading">PRODUCT LIST</h1>
+  <div class="navigation">
+    <a class="nav-item" href="{% url 'product_list' %}">Home</a>
+    <a class="nav-item" href="{% url 'product_new' %}">New Product</a>
+  </div>
+  <div class="products-container">
+    <h1 class="product-heading">Products</h1>
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+          <tr class="product-item">
+            <td class="product-name"><a class="product-link" href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a></td>
+            <td class="product-price">${{ product.price }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+    {% if products.has_other_pages %}
+      <div class="pagination">
         <span class="step-links">
-            {% if products.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ products.previous_page_number }}">previous</a>
-            {% endif %}
+          {% if products.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ products.previous_page_number }}">previous</a>
+          {% endif %}
 
-            <span class="current-page">
-                Page {{ products.number }} of {{ products.paginator.num_pages }}.
-            </span>
+          <span class="current-page">
+            Page {{ products.number }} of {{ products.paginator.num_pages }}.
+          </span>
 
-            {% if products.has_next %}
-                <a href="?page={{ products.next_page_number }}">next</a>
-                <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
+          {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}">next</a>
+            <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
         </span>
-    </div>
-{% endif %}
+      </div>
+    {% endif %}
+  </div>
 
-  <a href="{% url 'product_new' %}">New Product</a>
+
+
+  <style>
+    /* Sample CSS for product list page */
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+    .product-list-heading {
+        text-align: center;
+      }
+      
+      .navigation {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        background-color: #f0f0f0;
+        padding: 10px;
+      }
+      
+      .nav-item {
+        text-decoration: none;
+        color: #333;
+        margin-right: 20px; /* Adjust spacing between nav items */
+      }
+      
+      .nav-item:last-child {
+        margin-right: 0; /* Remove margin for the last nav item */
+      }
+      
+      .nav-item:hover {
+        color: #555;
+      }
+
+    .products-container {
+      width: 80%;
+      margin: 0 auto;
+    }
+    
+    .product-heading {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .product-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .product-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .product-item:hover {
+      background-color: #f9f9f9;
+    }
+
+    /* Sample CSS for table-like layout */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px; /* Adjust spacing between the heading and the table */
+}
+
+.product-table th, .product-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.product-table th {
+  background-color: #f0f0f0;
+}
+
+.product-table .product-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.product-table .product-link:hover {
+  color: #555;
+}
+
+    
+    .product-info {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .product-name {
+      font-size: 18px;
+    }
+    
+    .product-price {
+      font-size: 16px;
+      color: #27ae60;
+    }
+    
+    .pagination {
+      margin-top: 20px;
+    }
+    
+    .step-links a {
+      margin-right: 10px;
+    }
+    
+    .new-product-link {
+      display: block;
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: center;
+      text-decoration: none;
+      color: #3498db;
+    }
+    
+    .new-product-link:hover {
+      color: #2980b9;
+    }
+
+    .product-details {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .product-name,
+      .product-price {
+        flex: 1;
+      }
+    
+  </style>
 {% endblock %}
-
