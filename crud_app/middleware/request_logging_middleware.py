@@ -27,6 +27,8 @@ class TimingAndIdMiddleware(MiddlewareMixin):
         soup = BeautifulSoup(response_content, 'html.parser')
         table = soup.find('table')  # find the first table in the HTML
 
+        if not table:
+            return response
         headers = [th.text for th in table.find_all('th')]  # get the table headers
         rows = table.find_all('tr')  # get the table rows
 
