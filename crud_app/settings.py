@@ -87,7 +87,7 @@ DATABASES = {
 'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'amazon_clone',
         'USER': 'whoisyourdaddy',
-        'PASSWORD': 'suwwur-misJuk-dymme2',
+        
         'HOST': 'chittidb.postgres.database.azure.com',
         'PORT': '5432',
         'OPTIONS': {
